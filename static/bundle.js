@@ -106,6 +106,7 @@ var PersonListComponent = (function () {
         var peopleSignal = Rx_1.Observable.create(function (observer) {
             _this.addNewPerson = function () { return observer.next(); };
         });
+        this.people = peopleSignal.map(function () { return [new bmi_model_1.Person()]; })
             .startWith([new bmi_model_1.Person()])
             .scan(function (acc, value) { return acc.concat(value); });
     }

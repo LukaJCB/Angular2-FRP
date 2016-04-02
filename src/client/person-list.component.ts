@@ -21,10 +21,10 @@ export class PersonListComponent {
             this.addNewPerson = () => observer.next();
         });
         
+        this.people =  peopleSignal.map(() => [new Person()])
         .startWith([new Person()])
-        .scan((acc: Person[], value: Person[]) => acc.concat(value));
-        
-        this.people = people; 
+        .scan((acc: Person[], value) => acc.concat(value));
+         
     }
     
     addNewPerson: () => any;
