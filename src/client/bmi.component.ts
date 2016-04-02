@@ -1,43 +1,40 @@
-import {Component} from 'angular2/core'
+import {Component, Input} from 'angular2/core'
 import {Validators, FormBuilder,Control, ControlGroup} from 'angular2/common';
 import {Observable} from 'rxjs/Rx';
+import {Person} from './bmi.model';
 import 'rxjs/Rx';
 
 
 @Component({
-    selector: "site",
-    templateUrl: 'templates/template.html'
+    selector: "person-bmi",
+    templateUrl: 'templates/bmi-unit.html'
 })
-export class SiteComponent {
+export class BmiComponent {
     form: ControlGroup;
-    bmi: Observable<number>;
-    category: Observable<string>;
-    people: Observable<string[]>;
+    
+    nameControl: Control = new Control("");
+    
+    @Input('person') person: Person
+    
     
     constructor(fb: FormBuilder) {
         this.form = fb.group({
-            "name": new Control(""),
+            "name": this.nameControl,
             "height": new Control(""),
             "weight": new Control("")
         });
-        this.bmi = this.form.valueChanges
+    }
+    
+    ngOnInit(){
+        this.person.name = this.nameControl.valueChanges;
+        
+        this.person.bmi = this.form.valueChanges
         .debounceTime(200)
         .map(value => this.toBmi(value.weight, value.height))
         .filter(value => value > 0);
         
-        this.category = this.bmi.map(bmi => this.toCategory(bmi));
-        
-        const peopleSignal: Observable<string[]> = Observable.create(observer => {
-            this.addNewPerson = () => observer.next();
-        });
-        
-        this.people = peopleSignal.map(() => ["User"])
-        .startWith(["User 1"])
-        .scan((acc: string[], value: string[]) => acc.concat(value));
-        
+        this.person.category = this.person.bmi.map(bmi => this.toCategory(bmi));
     }
-    
-    addNewPerson: () => any;
     
     toBmi(weight: number, height: number): number {
         const heightInMeters = height / 100;

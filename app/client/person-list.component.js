@@ -14,26 +14,26 @@ var Rx_1 = require('rxjs/Rx');
 var bmi_model_1 = require('./bmi.model');
 var bmi_component_1 = require('./bmi.component');
 require('rxjs/Rx');
-var SiteComponent = (function () {
-    function SiteComponent(fb) {
+var PersonListComponent = (function () {
+    function PersonListComponent(fb) {
         var _this = this;
         var peopleSignal = Rx_1.Observable.create(function (observer) {
             _this.addNewPerson = function () { return observer.next(); };
         });
-        this.people = peopleSignal.map(function () { return [new bmi_model_1.Person()]; })
+        var people = peopleSignal.map(function () { return [new bmi_model_1.Person()]; })
             .startWith([new bmi_model_1.Person()])
             .scan(function (acc, value) { return acc.concat(value); });
-        console.log;
+        this.people = people;
     }
-    SiteComponent = __decorate([
+    PersonListComponent = __decorate([
         core_1.Component({
             selector: "site",
-            templateUrl: 'templates/template.html',
+            templateUrl: 'templates/person-list.html',
             directives: [bmi_component_1.BmiComponent]
         }), 
         __metadata('design:paramtypes', [common_1.FormBuilder])
-    ], SiteComponent);
-    return SiteComponent;
+    ], PersonListComponent);
+    return PersonListComponent;
 }());
-exports.SiteComponent = SiteComponent;
-//# sourceMappingURL=site.component.js.map
+exports.PersonListComponent = PersonListComponent;
+//# sourceMappingURL=person-list.component.js.map
