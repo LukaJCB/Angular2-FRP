@@ -12,7 +12,6 @@ import 'rxjs/Rx';
     directives: [BmiComponent]
 })
 export class PersonListComponent {
-    form: ControlGroup;
     
     people: Observable<Person[]>;
     
@@ -22,7 +21,6 @@ export class PersonListComponent {
             this.addNewPerson = () => observer.next();
         });
         
-        const people =  peopleSignal.map(() => [new Person()])
         .startWith([new Person()])
         .scan((acc: Person[], value: Person[]) => acc.concat(value));
         

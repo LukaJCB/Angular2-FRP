@@ -12,11 +12,9 @@ import 'rxjs/Rx';
 })
 export class BmiComponent {
     form: ControlGroup;
-    
     nameControl: Control = new Control("");
     
     @Input('person') person: Person
-    
     
     constructor(fb: FormBuilder) {
         this.form = fb.group({

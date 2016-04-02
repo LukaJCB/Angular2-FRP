@@ -20,10 +20,9 @@ var PersonListComponent = (function () {
         var peopleSignal = Rx_1.Observable.create(function (observer) {
             _this.addNewPerson = function () { return observer.next(); };
         });
-        var people = peopleSignal.map(function () { return [new bmi_model_1.Person()]; })
+        this.people = peopleSignal.map(function () { return [new bmi_model_1.Person()]; })
             .startWith([new bmi_model_1.Person()])
             .scan(function (acc, value) { return acc.concat(value); });
-        this.people = people;
     }
     PersonListComponent = __decorate([
         core_1.Component({
