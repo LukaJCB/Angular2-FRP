@@ -1,2 +1,1 @@
-# Angular 2 Server-Client Code Boilerplate
-Get started with Express, Angular 2, Node, Typescript and Browserify.
+# Functional Reactive Programming using RxJS and Angular 2.
