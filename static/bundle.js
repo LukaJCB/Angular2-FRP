@@ -52,7 +52,8 @@ var BmiComponent = (function () {
     BmiComponent = __decorate([
         core_1.Component({
             selector: "person-bmi",
-            templateUrl: 'templates/bmi-unit.html'
+            templateUrl: 'templates/bmi-unit.html',
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [common_1.FormBuilder])
     ], BmiComponent);

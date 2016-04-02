@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core'
+import {Component, Input, ChangeDetectionStrategy} from 'angular2/core'
 import {Validators, FormBuilder,Control, ControlGroup} from 'angular2/common';
 import {Observable} from 'rxjs/Rx';
 import {Person} from './bmi.model';
@@ -7,7 +7,8 @@ import 'rxjs/Rx';
 
 @Component({
     selector: "person-bmi",
-    templateUrl: 'templates/bmi-unit.html'
+    templateUrl: 'templates/bmi-unit.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BmiComponent {
     form: ControlGroup;
