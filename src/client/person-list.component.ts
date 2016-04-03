@@ -15,16 +15,21 @@ export class PersonListComponent {
     
     people: Observable<Person[]>;
     
-    constructor(fb: FormBuilder) {
+    numberOfPeople: Observable<number>;
+    
+    
+    ngOnInit() {
        
         const peopleSignal: Observable<{}> = Observable.create(observer => {
             this.addNewPerson = () => observer.next();
-        });
+        }).share();
         
         this.people =  peopleSignal.map(() => [new Person()])
         .startWith([new Person()])
         .scan((acc: Person[], value) => acc.concat(value));
          
+        this.numberOfPeople = this.people.map(people => people.length);
+        
     }
     
     addNewPerson: () => any;
